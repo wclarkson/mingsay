@@ -32,8 +32,9 @@ end
 
 text = ARGF.read.split("\n")
 if (text.size==1)
+    width = text[0].size
     puts " " + "_"*(width+2)
-    puts "< " + text + " >"
+    puts "< " + text[0] + " >"
     puts " " + "-"*(width+2)
 else
     width = text.map {|x| x.size}.max
