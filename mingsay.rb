@@ -9,7 +9,7 @@ def putline(line,width,left,right)
     print " " + right + "\n"
 end
 
-def putming(offset)
+def putming(offset, person)
     cow = [
       "\\   ^__^",
       " \\  (oo)\\_______",
@@ -25,18 +25,37 @@ def putming(offset)
       "     \\    /",
       "     /----\\"
     ]
-    ming.each do |line|
-      puts " "*offset + line
+    nr = [
+      "\\    nnnnnn",
+      " \\  (|~  _|)",
+      "  \\ (-[][]-)",
+      "    (| __ |)",
+      "    ((uuuu))",
+      "    ( )  ( )",
+      "    ( )  ( )",
+    ]
+    if (person == "-nr")
+      nr.each do |line|
+        puts " "*offset + line
+      end
+    elsif (person == "-cow")
+      cow.each do |line|
+        puts " "*offset + line
+      end
+    else
+      ming.each do |line|
+        puts " "*offset + line
+      end
     end
 end
 
-text = ARGF.read.split("\n")
-if (text.size==1)
+def draw(text, option)
+  if (text.size==1)
     width = text[0].size
     puts " " + "_"*(width+2)
     puts "< " + text[0] + " >"
     puts " " + "-"*(width+2)
-else
+  else
     width = text.map {|x| x.size}.max
     puts " " + "_"*(width+2)
     putline(text[0],width,"/","\\")
@@ -45,6 +64,18 @@ else
     end
     putline(text[-1],width,"\\","/")
     puts " " + "-"*(width+2)
+  end
+  putming(10, option)
 end
 
-putming(10)
+nargs = ARGV.size
+if (nargs == 0)
+  puts "Usage: putming -flag text\n"
+  puts "Possible flags are -nr and -ming\n"
+else
+  option = ARGV.shift
+  text = ARGF.read.split("\n")
+  draw(text, option)
+end
+
+
