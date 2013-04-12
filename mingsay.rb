@@ -70,12 +70,17 @@ end
 
 nargs = ARGV.size
 if (nargs == 0)
-  puts "Usage: putming -flag text\n"
-  puts "Possible flags are -nr and -ming\n"
-else
+  text = ARGF.read.split("\n")
+  draw(text, "-ming")
+elsif (nargs == 1)
   option = ARGV.shift
   text = ARGF.read.split("\n")
   draw(text, option)
+else
+  puts "Usage: echo 'text' | ./mingsay.rb -flag\n"
+  puts "Flags: -nr \n"
+  puts "       -cow \n"
+  puts "       -ming \n"
 end
 
 
