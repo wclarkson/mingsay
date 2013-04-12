@@ -34,6 +34,22 @@ def putming(offset, person)
       "    ( )  ( )",
       "    ( )  ( )",
     ]
+    ben = [
+      "     _____",
+      "\\   /  __ \\",
+      " \\ |__/)~ |",
+      "  \\| n  n |",
+      "   |  __  |",
+      "    \\____/",
+    ]
+    mark = [
+      "     ____",
+      "\\   /    \\",
+      " \\ | _  _ |",
+      "  \\| .  . |",
+      "   |  ~~  |",
+      "    \\____/",
+    ]
     if (person == "-nr")
       nr.each do |line|
         puts " "*offset + line
@@ -41,6 +57,14 @@ def putming(offset, person)
     elsif (person == "-cow")
       cow.each do |line|
         puts " "*offset + line
+      end
+    elsif (person == "-ben")
+      ben.each do |line|
+        puts " "*offset + line
+      end
+    elsif (person == "-mark")
+      mark.each do |line|
+        puts " " *offset + line
       end
     else
       ming.each do |line|
