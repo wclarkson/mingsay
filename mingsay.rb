@@ -18,73 +18,51 @@ def errormessage()
   puts "       -mark\n"
 end
 
-people = ["-ming",
-          "-nr",
-          "-cow",
-          "-ben",
-          "-mark"]
+people = {"-ming" =>
+          [
+            "\\     ___",
+            " \\   /    \\",
+            "  \\ |`[][]-|",
+            "    |  __  |",
+            "     \\    /",
+            "     /----\\"   ],
+          "-nr" =>[
+            "\\    nnnnnn",
+            " \\  (|~  _|)",
+            "  \\ (-[][]-)",
+            "    (| __ |)",
+            "    ((uuuu))",
+            "    ( )  ( )",
+            "    ( )  ( )",
+          ],
+          "-cow"=>[
+            "\\   ^__^",
+            " \\  (oo)\\_______",
+            "    (__)\\       )\\/\\",
+            "        ||----w |",
+            "        ||     ||"
+          ],
+          "-ben"=>[
+            "     _____",
+            "\\   /  __ \\",
+            " \\ |__/)~ |",
+            "  \\| n  n |",
+            "   |  __  |",
+            "    \\____/",
+          ],
+          "-mark"=>[
+            "     ____",
+            "\\   /    \\",
+            " \\ | _  _ |",
+            "  \\| .  . |",
+            "   |  ~~  |",
+            "    \\____/",
+          ]}
+
 def putming(offset, person)
-    cow = [
-      "\\   ^__^",
-      " \\  (oo)\\_______",
-      "    (__)\\       )\\/\\",
-      "        ||----w |",
-      "        ||     ||"
-    ]
-    ming = [
-      "\\     ___",
-      " \\   /    \\",
-      "  \\ |`[][]-|",
-      "    |  __  |",
-      "     \\    /",
-      "     /----\\"
-    ]
-    nr = [
-      "\\    nnnnnn",
-      " \\  (|~  _|)",
-      "  \\ (-[][]-)",
-      "    (| __ |)",
-      "    ((uuuu))",
-      "    ( )  ( )",
-      "    ( )  ( )",
-    ]
-    ben = [
-      "     _____",
-      "\\   /  __ \\",
-      " \\ |__/)~ |",
-      "  \\| n  n |",
-      "   |  __  |",
-      "    \\____/",
-    ]
-    mark = [
-      "     ____",
-      "\\   /    \\",
-      " \\ | _  _ |",
-      "  \\| .  . |",
-      "   |  ~~  |",
-      "    \\____/",
-    ]
-    if (person == "-nr")
-      nr.each do |line|
-        puts " "*offset + line
+    person.each do |line|
+      puts " "*offset + line
       end
-    elsif (person == "-cow")
-      cow.each do |line|
-        puts " "*offset + line
-      end
-    elsif (person == "-ben")
-      ben.each do |line|
-        puts " "*offset + line
-      end
-    elsif (person == "-mark")
-      mark.each do |line|
-        puts " " *offset + line
-      end
-    else
-      ming.each do |line|
-        puts " "*offset + line
-      end
-    end
 end
 
 def draw(text, option)
@@ -107,14 +85,15 @@ def draw(text, option)
 end
 
 nargs = ARGV.size
+
 if (nargs == 0)
   text = ARGF.read.split("\n")
-  draw(text, "-ming")
+  draw(text, people["-ming"])
 elsif (nargs == 1)
   option = ARGV.shift
-  if people.include?(option)
+  if people.has_key?(option)
     text = ARGF.read.split("\n")
-    draw(text, option)
+    draw(text, people[option])
   else
     errormessage()
   end
