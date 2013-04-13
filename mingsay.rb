@@ -9,6 +9,20 @@ def putline(line,width,left,right)
     print " " + right + "\n"
 end
 
+def errormessage()
+  puts "Usage: echo 'text' | ./mingsay.rb -flag\n"
+  puts "Flags: -nr \n"
+  puts "       -cow \n"
+  puts "       -ming \n"
+  puts "       -ben\n"
+  puts "       -mark\n"
+end
+
+people = ["-ming",
+          "-nr",
+          "-cow",
+          "-ben",
+          "-mark"]
 def putming(offset, person)
     cow = [
       "\\   ^__^",
@@ -98,13 +112,13 @@ if (nargs == 0)
   draw(text, "-ming")
 elsif (nargs == 1)
   option = ARGV.shift
-  text = ARGF.read.split("\n")
-  draw(text, option)
+  if people.include?(option)
+    text = ARGF.read.split("\n")
+    draw(text, option)
+  else
+    errormessage()
+  end
 else
-  puts "Usage: echo 'text' | ./mingsay.rb -flag\n"
-  puts "Flags: -nr \n"
-  puts "       -cow \n"
-  puts "       -ming \n"
+  errormessage()
 end
-
 
