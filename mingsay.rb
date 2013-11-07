@@ -60,16 +60,22 @@ end
 output = ""
 
 options = { :person => 'ming', :quote => false }
-(OptionParser.new do |opts|
-    opts.banner = "usage: mingsay [options]"
+parser = OptionParser.new do |opts|
+    opts.banner = "usage: mingsay [--person PERSONFILE] [--quote]"
     opts.on('-p', '--person PERSONFILE', 'which person to use') do |person|
         options[:person] = person
     end
     opts.on('-q', '--quote', 'Choose a random quote') do |q|
         options[:quote] = true
     end
-end).parse!(ARGV)
+end
 
+begin
+  parser.parse!(ARGV)
+rescue OptionParser::ParseError
+  puts parser.banner
+  exit
+end
 
 m = Mingsay.new(options[:person])
 if (options[:quote])
