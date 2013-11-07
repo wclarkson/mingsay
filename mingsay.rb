@@ -15,7 +15,7 @@ class Mingsay
             img_shift = 8
             @image = @image.split("\n").map {|l| " "*img_shift+l}
             @quotations = File.open(path+'/quotations/'+@name, 'r')
-                              .read.split("\n\n").map(&:chomp)
+            .read.split("\n\n").map(&:chomp)
         rescue
             puts "No data for specified person found in mingsay directory."
             exit
@@ -55,7 +55,15 @@ class Mingsay
     end
 end
 
-m = Mingsay.new('nr')
-m.random_quote()
+output = ""
+
+if (ARGV.size == 0)
+    output = gets()
+else
+    output = ARGV.join(' ')
+end
+
+m = Mingsay.new('ming')
+m.set_quote(output)
 m.print()
 
