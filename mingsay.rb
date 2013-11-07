@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+
 class Mingsay
     attr_accessor :name, :image, :quote, :quotations
 
@@ -57,13 +59,26 @@ end
 
 output = ""
 
-if (ARGV.size == 0)
-    output = gets()
-else
-    output = ARGV.join(' ')
-end
+options = { :person => 'ming', :quote => false }
+OptionParser.new do |opts|
+    opts.on('-p', '--person PERSONFILE', 'which person to use') do |person|
+        options[:person] = person
+    end
+    opts.on('-q', '--quote', 'Choose a random quote')
+        options[:quote] = true
+end.parse!(ARGV)
 
-m = Mingsay.new('ming')
-m.set_quote(output)
+
+m = Mingsay.new(options[:person])
+if (options[:quote])
+    m.random_quote()
+else
+    if (ARGV.size == 0)
+        output = gets()
+    else
+        output = ARGV.join(' ')
+    end
+    m.set_quote(output)
+end
 m.print()
 
