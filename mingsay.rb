@@ -61,15 +61,18 @@ output = ""
 
 options = { :person => 'ming', :quote => false }
 OptionParser.new do |opts|
+    opts.banner = "usage: mingsay [options]"
     opts.on('-p', '--person PERSONFILE', 'which person to use') do |person|
         options[:person] = person
     end
-    opts.on('-q', '--quote', 'Choose a random quote')
+    opts.on('-q', '--quote', 'Choose a random quote') do |q|
         options[:quote] = true
+    end
 end.parse!(ARGV)
 
 
 m = Mingsay.new(options[:person])
+puts options
 if (options[:quote])
     m.random_quote()
 else
