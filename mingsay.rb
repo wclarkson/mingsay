@@ -7,14 +7,18 @@ class Mingsay
 
   def initialize(name)
     @name = name
-    path = File.expand_path(ENV['MINGSAY_PATH'])
+    if(ENV['MINGSAY_PATH'])
+        path = File.expand_path(ENV['MINGSAY_PATH'])
+    else
+        path = File.dirname(__FILE__)
+    end
     if !File.directory?(path) then
       puts "No mingsay directory found."
       exit
     end
 
     img_path = path + '/people/' + @name
-    quote_path = path + '/quotations' + @name
+    quote_path = path + '/quotations/' + @name
     if File.exists?(img_path)
       @image = File.open(img_path, 'r').read
       img_shift = 8
